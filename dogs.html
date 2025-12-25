@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Собаки — питомник «Северная Лапа»</title>
+  <meta name="description" content="Каталог собак питомника: щенки и взрослые, фильтры по возрасту и активности, избранное, карточки и подробности.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.min.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="На главную">
+        <span class="brand__mark" aria-hidden="true">🐾</span>
+        <span class="brand__text">
+          <span class="brand__name">Северная Лапа</span>
+          <span class="brand__tag">питомник</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Навигация">
+        <a class="nav__link" href="dogs.html" aria-current="page">Собаки</a>
+        <button class="nav__link nav__btn" data-open-modal="contact">Контакты</button>
+        <button class="btn btn--primary btn--small" data-open-modal="booking">
+          Записаться
+        </button>
+      </nav>
+
+      <button class="burger" aria-label="Открыть меню" aria-expanded="false" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-nav" data-mobile-nav hidden>
+      <div class="container mobile-nav__inner">
+        <a class="mobile-nav__link" href="index.html">Главная</a>
+        <button class="mobile-nav__link" data-open-modal="contact">Контакты</button>
+        <button class="btn btn--primary" data-open-modal="booking">Записаться</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="section__head section__head--tight">
+          <div>
+            <h1 class="section__title">Каталог собак</h1>
+            <p class="section__subtitle">
+              Фильтруй по возрасту и активности, сохраняй понравившихся в избранное.
+            </p>
+          </div>
+
+          <div class="actions-row">
+            <button class="btn btn--ghost" id="showFavoritesBtn" type="button">
+              Избранное <span class="badge" id="favCount">0</span>
+            </button>
+            <button class="btn btn--primary" data-open-modal="booking" type="button">
+              Оставить заявку
+            </button>
+          </div>
+        </div>
+
+        <div class="filters" role="region" aria-label="Фильтры каталога">
+          <div class="field">
+            <label class="label" for="search">Поиск</label>
+            <input class="input" id="search" type="search" placeholder="Например: Лайка, спокойный, щенок…" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label class="label" for="age">Возраст</label>
+            <select class="select" id="age">
+              <option value="all">Все</option>
+              <option value="puppy">Щенок</option>
+              <option value="young">Юниор</option>
+              <option value="adult">Взрослый</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" for="energy">Активность</label>
+            <select class="select" id="energy">
+              <option value="all">Любая</option>
+              <option value="low">Низкая</option>
+              <option value="medium">Средняя</option>
+              <option value="high">Высокая</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sort">Сортировка</label>
+            <select class="select" id="sort">
+              <option value="new">Сначала новые</option>
+              <option value="ageAsc">Возраст: по возрастанию</option>
+              <option value="ageDesc">Возраст: по убыванию</option>
+              <option value="name">По имени</option>
+            </select>
+          </div>
+
+          <div class="field field--btn">
+            <button class="btn btn--ghost btn--block" id="resetBtn" type="button">Сбросить</button>
+          </div>
+        </div>
+
+        <div class="cards-grid" id="dogsGrid" aria-live="polite"></div>
+
+        <div class="empty" id="emptyState" hidden>
+          <div class="empty__title">Ничего не найдено</div>
+          <div class="muted">Попробуй изменить фильтры или очистить поиск.</div>
+          <button class="btn btn--primary" id="clearSearchBtn" type="button">Очистить</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__brand">🐾 Северная Лапа</div>
+        <div class="muted">Каталог и подбор собаки.</div>
+      </div>
+
+      <div class="footer__links">
+        <a class="footer__link" href="index.html">Главная</a>
+        <button class="footer__link" data-open-modal="contact">Контакты</button>
+        <button class="footer__link" data-open-modal="booking">Записаться</button>
+      </div>
+
+      <div class="footer__copy muted">© <span id="year"></span> Северная Лапа</div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal" id="modalOverlay" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Модальное окно">
+      <button class="modal__close" aria-label="Закрыть окно" data-close-modal>✕</button>
+      <div class="modal__content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+  <script src="script.min.js"></script>
+</body>
+</html>
